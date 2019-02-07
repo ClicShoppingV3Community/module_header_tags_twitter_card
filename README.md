@@ -41,4 +41,4 @@ Implementation:
 
  trademark License info : https://www.clicshopping.org/forum/trademark/
 
-![image](https://github.com/ClicShoppingV3Community/module_header_tags_twitter_card/blob/master/ModuleInfosJson/image.png)
+![image](https://github.com/ClicShoppingV3Community/module_header_tags_twitter_card/blob/master/ModuleInfosJson/image.jpg)
