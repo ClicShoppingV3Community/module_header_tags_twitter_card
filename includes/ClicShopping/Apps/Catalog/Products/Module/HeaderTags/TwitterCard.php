@@ -141,14 +141,15 @@
 
             $display_result = $CLICSHOPPING_Template->addBlock($result, $this->group);
 
-        $output =
+            $output =
 <<<EOD
 {$display_result}
 EOD;
+
+            return $output;
           }
         }
       }
-      return $output;
     }
 
     public function Install() {
