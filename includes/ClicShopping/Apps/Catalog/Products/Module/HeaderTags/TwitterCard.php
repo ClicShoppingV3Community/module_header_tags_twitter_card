@@ -1,13 +1,13 @@
 <?php
-/**
- *
- *  @copyright 2008 - https://www.clicshopping.org
- *  @Brand : ClicShopping(Tm) at Inpi all right Reserved
- *  @Licence GPL 2 & MIT
- *  @licence MIT - Portion of osCommerce 2.4
- *  @Info : https://www.clicshopping.org/forum/trademark/
- *
- */
+  /**
+   *
+   * @copyright 2008 - https://www.clicshopping.org
+   * @Brand : ClicShopping(Tm) at Inpi all right Reserved
+   * @Licence GPL 2 & MIT
+   * @licence MIT - Portion of osCommerce 2.4
+   * @Info : https://www.clicshopping.org/forum/trademark/
+   *
+   */
 
   namespace ClicShopping\Apps\Catalog\Products\Module\HeaderTags;
 
@@ -18,13 +18,15 @@
 
   use ClicShopping\Apps\Catalog\Products\Products as ProductsApp;
 
-  class TwitterCard extends \ClicShopping\OM\Modules\HeaderTagsAbstract {
+  class TwitterCard extends \ClicShopping\OM\Modules\HeaderTagsAbstract
+  {
 
     protected $lang;
     protected $app;
     protected $group;
 
-    protected function init() {
+    protected function init()
+    {
       if (!Registry::exists('Products')) {
         Registry::set('Products', new ProductsApp());
       }
@@ -38,17 +40,19 @@
       $this->title = $this->app->getDef('module_header_tags_twitter_card_title');
       $this->description = $this->app->getDef('module_header_tags_twitter_card_description');
 
-      if ( defined('MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_STATUS') ) {
+      if (defined('MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_STATUS')) {
         $this->sort_order = (int)MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_SORT_ORDER;
         $this->enabled = (MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_STATUS == 'True');
       }
     }
 
-    public function isEnabled() {
+    public function isEnabled()
+    {
       return $this->enabled;
     }
 
-    public function getOutput() {
+    public function getOutput()
+    {
       $CLICSHOPPING_Template = Registry::get('Template');
       $CLICSHOPPING_Currencies = Registry::get('Currencies');
       $CLICSHOPPING_Customer = Registry::get('Customer');
@@ -59,7 +63,7 @@
         return false;
       }
 
-      if (isset($_GET['Products']) && isset($_GET['Description']) ) {
+      if (isset($_GET['Products']) && isset($_GET['Description'])) {
         if ($CLICSHOPPING_Customer->getCustomersGroupID() == 0) {
 
           $Qproduct = $this->app->db->prepare('select p.products_price
@@ -79,21 +83,21 @@
           if ($Qproduct->fetch() !== false) {
 
             $data = ['card' => 'product',
-                     'title' => $CLICSHOPPING_ProductsCommon->getProductsName(),
-                     'domain' => HTTP::typeUrlDomain()
-                    ];
+              'title' => $CLICSHOPPING_ProductsCommon->getProductsName(),
+              'domain' => HTTP::typeUrlDomain()
+            ];
 
-            if ( !is_null(MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_SITE_ID) ) {
+            if (!is_null(MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_SITE_ID)) {
               $data['site'] = MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_SITE_ID;
             }
 
-            if ( !is_null(MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_USER_ID) ) {
+            if (!is_null(MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_USER_ID)) {
               $data['creator'] = MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_USER_ID;
             }
 
             $product_description = substr(trim(preg_replace('/\s\s+/', ' ', strip_tags($CLICSHOPPING_ProductsCommon->getProductsDescription()))), 0, 197);
 
-            if ( strlen($product_description) == 197 ) {
+            if (strlen($product_description) == 197) {
               $product_description .= ' ..';
             }
 
@@ -118,11 +122,11 @@
             $data['data1'] = html_entity_decode($products_price);
             $data['label1'] = $_SESSION['currency'];
 
-            if ( $Qproduct->value('products_date_available') > date('Y-m-d H:i:s') ) {
+            if ($Qproduct->value('products_date_available') > date('Y-m-d H:i:s')) {
               $data['data2'] = CLICSHOPPING::getDef('module_header_tags_product_twitter_card_text_pre_order');
-              $data['label2'] =  DateTime::toShort($CLICSHOPPING_ProductsCommon->getProductsDateAvailable());
+              $data['label2'] = DateTime::toShort($CLICSHOPPING_ProductsCommon->getProductsDateAvailable());
 
-            } elseif ( $CLICSHOPPING_ProductsCommon->getProductsStock() > 0 ) {
+            } elseif ($CLICSHOPPING_ProductsCommon->getProductsStock() > 0) {
               $data['data2'] = CLICSHOPPING::getDef('module_header_tags_product_twitter_card_text_in_stock');
               $data['label2'] = CLICSHOPPING::getDef('module_header_tags_product_twitter_card_text_buy_now');
             } else {
@@ -133,7 +137,7 @@
             $result = '<!-- Start Twitter Card -->' . "\n";
             $result .= '<meta name="twitter:card" content="' . MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_TYPE . '" />' . "\n";
 
-            foreach ( $data as $key => $value ) {
+            foreach ($data as $key => $value) {
               $result .= '<meta name="twitter:' . HTML::outputProtected($key) . '"  content="' . HTML::outputProtected($value) . '" />' . "\n";
             }
 
@@ -142,7 +146,7 @@
             $display_result = $CLICSHOPPING_Template->addBlock($result, $this->group);
 
             $output =
-<<<EOD
+              <<<EOD
 {$display_result}
 EOD;
 
@@ -152,7 +156,8 @@ EOD;
       }
     }
 
-    public function Install() {
+    public function Install()
+    {
       $this->app->db->save('configuration', [
           'configuration_title' => 'Do you want activate this module ?',
           'configuration_key' => 'MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_STATUS',
@@ -229,13 +234,14 @@ EOD;
       );
     }
 
-    public function keys() {
+    public function keys()
+    {
       return ['MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_STATUS',
-              'MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_USER_ID',
-              'MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_SITE_ID',
-              'MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_TYPE',
-              'MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_TYPE_ADMINISTRATION',
-              'MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_SORT_ORDER'
-             ];
+        'MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_USER_ID',
+        'MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_SITE_ID',
+        'MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_TYPE',
+        'MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_TYPE_ADMINISTRATION',
+        'MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_SORT_ORDER'
+      ];
     }
   }
