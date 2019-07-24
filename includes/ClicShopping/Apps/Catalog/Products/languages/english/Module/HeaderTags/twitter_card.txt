@@ -1,2 +1,2 @@
-module_header_tags_twitter_card_title = Do you want use twitter_card in products description ?
+module_header_tags_twitter_card_title = Do you want to use twitter_card in products description ?
 module_header_tags_twitter_card_description = Add the twitter_card balise in products description
