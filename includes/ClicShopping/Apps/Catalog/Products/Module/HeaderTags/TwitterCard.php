@@ -110,9 +110,9 @@
             }
 
             if ($new_price = $CLICSHOPPING_ProductsCommon->getProductsSpecialPrice()) {
-              $products_price = $CLICSHOPPING_Currencies->display_price($new_price, $CLICSHOPPING_Tax->getTaxRate($CLICSHOPPING_ProductsCommon->getProductsTaxClassId()));
+              $products_price = $CLICSHOPPING_Currencies->displayPrice($new_price, $CLICSHOPPING_Tax->getTaxRate($CLICSHOPPING_ProductsCommon->getProductsTaxClassId()));
             } else {
-              $products_price = $CLICSHOPPING_Currencies->display_price($Qproduct->value('products_price'), $CLICSHOPPING_Tax->getTaxRate($CLICSHOPPING_ProductsCommon->getProductsTaxClassId()));
+              $products_price = $CLICSHOPPING_Currencies->displayPrice($Qproduct->value('products_price'), $CLICSHOPPING_Tax->getTaxRate($CLICSHOPPING_ProductsCommon->getProductsTaxClassId()));
             }
 
             $data['description'] = $product_description;
