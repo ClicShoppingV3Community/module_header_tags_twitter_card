@@ -33,7 +33,7 @@
 
       $this->app = Registry::get('Products');
       $this->lang = Registry::get('Language');
-      $this->group = 'footer_script'; // could be header_tags or footer_scripts
+      $this->group = 'footer_scripts'; // could be header_tags or footer_scripts
 
       $this->app->loadDefinitions('Module/HeaderTags/twitter_card');
 
