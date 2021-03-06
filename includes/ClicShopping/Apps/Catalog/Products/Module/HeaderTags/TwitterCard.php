@@ -23,7 +23,7 @@
 
     protected $lang;
     protected $app;
-    public $group;
+    public string $group;
 
     protected function init()
     {
@@ -40,7 +40,7 @@
       $this->title = $this->app->getDef('module_header_tags_twitter_card_title');
       $this->description = $this->app->getDef('module_header_tags_twitter_card_description');
 
-      if (defined('MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_STATUS')) {
+      if (\defined('MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_STATUS')) {
         $this->sort_order = (int)MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_SORT_ORDER;
         $this->enabled = (MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_STATUS == 'True');
       }
@@ -59,7 +59,7 @@
       $CLICSHOPPING_ProductsCommon = Registry::get('ProductsCommon');
       $CLICSHOPPING_Tax = Registry::get('Tax');
 
-      if (!defined('CLICSHOPPING_APP_CATALOG_PRODUCTS_PD_STATUS') || CLICSHOPPING_APP_CATALOG_PRODUCTS_PD_STATUS == 'False') {
+      if (!\defined('CLICSHOPPING_APP_CATALOG_PRODUCTS_PD_STATUS') || CLICSHOPPING_APP_CATALOG_PRODUCTS_PD_STATUS == 'False') {
         return false;
       }
 
@@ -87,11 +87,11 @@
               'domain' => HTTP::typeUrlDomain()
             ];
 
-            if (!is_null(MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_SITE_ID)) {
+            if (!\is_null(MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_SITE_ID)) {
               $data['site'] = MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_SITE_ID;
             }
 
-            if (!is_null(MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_USER_ID)) {
+            if (!\is_null(MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_USER_ID)) {
               $data['creator'] = MODULE_HEADER_TAGS_PRODUCT_TWITTER_CARD_USER_ID;
             }
 
