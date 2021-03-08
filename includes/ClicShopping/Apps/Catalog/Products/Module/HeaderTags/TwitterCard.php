@@ -20,10 +20,8 @@
 
   class TwitterCard extends \ClicShopping\OM\Modules\HeaderTagsAbstract
   {
-
     protected $lang;
     protected $app;
-    public string $group;
 
     protected function init()
     {
@@ -97,7 +95,7 @@
 
             $product_description = substr(trim(preg_replace('/\s\s+/', ' ', strip_tags($CLICSHOPPING_ProductsCommon->getProductsDescription()))), 0, 197);
 
-            if (strlen($product_description) == 197) {
+            if (\strlen($product_description) == 197) {
               $product_description .= ' ..';
             }
 
