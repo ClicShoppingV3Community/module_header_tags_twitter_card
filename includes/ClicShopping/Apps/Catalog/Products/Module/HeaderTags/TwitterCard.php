@@ -20,8 +20,8 @@
 
   class TwitterCard extends \ClicShopping\OM\Modules\HeaderTagsAbstract
   {
-    protected $lang;
-    protected $app;
+    protected mixed $lang;
+    protected mixed $app;
 
     protected function init()
     {
@@ -61,7 +61,7 @@
         return false;
       }
 
-      if (isset($_GET['Products']) && isset($_GET['Description'])) {
+      if (isset($_GET['Products'], $_GET['Description'])) {
         if ($CLICSHOPPING_Customer->getCustomersGroupID() == 0) {
 
           $Qproduct = $this->app->db->prepare('select p.products_price
